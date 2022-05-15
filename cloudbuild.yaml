@@ -7,12 +7,12 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
-    - --filename=deployment.yaml
+    - --filename=onlyyamls/deployment.yaml
     - --image=gcr.io/sjm-test/fifi
     - --location=us-central1-c
     - --cluster=cluster-1
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply', '-f', 'lb.yaml']
+    args: ['apply', '-f', 'onlyyamls/lb.yaml']
     env:
      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
      - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
