@@ -1,14 +1,14 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/sjm-test', '.' , '-f', 'Dockerfile']
+  - name: 'gcr.io/sjm-test/docker'
+    args: [ 'build', '-t', 'gcr.io/sjm-test/fifi:latest', '.' , '-f', 'Dockerfile']
   # push the container image to Container Registry
   - name: 'gcr.io/sjm-test/docker'
-    args: ['push', 'gcr.io/sjm-test/fifi']
+    args: ['push', 'gcr.io/sjm-test/fifi:latest']
   - name: "gcr.io/sjm-test/gke-deploy"
     args:
     - run
     - --filename=pods.yaml
-    - --image=gcr.io/sjm-test/sjm-test:latest
+    - --image=gcr.io/sjm-test/fifi:latest
     - --location=us-central1-c
     - --cluster=cluster-1
   - name: 'gcr.io/sjm-test/kubectl'
