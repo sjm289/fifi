@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fifi-deploy
+  labels: 
+    type: web-server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: web-server
+  template:
+    metadata:
+      name: nginx
+      labels:
+        type: web-server
+    spec:
+      containers:
+      - name: nginx
+        image: gcr.io/sjm-test/fifi
+        ports:
+        - containerPort: 80
